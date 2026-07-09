@@ -15,8 +15,7 @@ COPY README.md .
 COPY latex_server/ latex_server/
 
 # Upgrade packaging tools first
-RUN pip3 install --upgrade \
-    pip \
+RUN pip3 install \
     setuptools \
     wheel \
     --break-system-packages
