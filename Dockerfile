@@ -1,12 +1,10 @@
 FROM kjarosh/latex:latest
 
-# Install Python and build dependencies
 RUN apk add --no-cache \
     python3 \
     py3-pip \
-    gcc \
-    musl-dev \
-    python3-dev
+    py3-setuptools \
+    py3-wheel
 
 WORKDIR /app
 
@@ -14,19 +12,8 @@ COPY pyproject.toml .
 COPY README.md .
 COPY latex_server/ latex_server/
 
-# Upgrade packaging tools first
-RUN pip3 install \
-    setuptools \
-    wheel \
-    --break-system-packages
+RUN pip3 install --no-cache-dir --break-system-packages .
 
-# Install application
-RUN pip3 install \
-    --no-cache-dir \
-    --break-system-packages \
-    .
-
-# Create non-root user
 RUN adduser -D -u 1000 latexuser && \
     chown -R latexuser:latexuser /app
 
