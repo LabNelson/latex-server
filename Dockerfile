@@ -1,10 +1,11 @@
 FROM python:3.12-slim
 
 RUN apt-get update && apt-get install -y \
-    texlive-latex-base \
-    texlive-latex-recommended \
+    texlive-xetex \
+    texlive-luatex \
     texlive-latex-extra \
     texlive-fonts-recommended \
+    texlive-fonts-extra \
     texlive-bibtex-extra \
     biber \
     && rm -rf /var/lib/apt/lists/*
